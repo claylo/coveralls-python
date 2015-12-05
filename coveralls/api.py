@@ -74,6 +74,8 @@ class Coveralls(object):
                                      % self.config_filename)
 
     def load_config(self):
+        config_file_path = os.path.join(os.getcwd(), self.config_filename)
+        log.info('looking for config file %s', config_file_path)
         try:
             import yaml
             return yaml.safe_load(open(os.path.join(os.getcwd(), self.config_filename)))
