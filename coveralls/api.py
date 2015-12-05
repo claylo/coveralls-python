@@ -78,7 +78,11 @@ class Coveralls(object):
         log.info('looking for config file %s', config_file_path)
         try:
             import yaml
-            return yaml.safe_load(open(os.path.join(os.getcwd(), self.config_filename)))
+            file_config = yaml.safe_load(open(os.path.join(os.getcwd(), self.config_filename)))
+            log.info('hey, got file_config')
+            the_service_name = file_config.get('service_name', None) or 'whoops'
+            log.info('file config get service_name is %s', the_service_name)
+            return file_config
         except ImportError:
             return {}
         except (OSError, IOError):
